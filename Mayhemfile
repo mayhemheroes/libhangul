@@ -1,0 +1,5 @@
+project: rnshah9/libhangul
+target: libhangul
+
+cmds:
+  - cmd: /repo/tools/.libs/hangul @@

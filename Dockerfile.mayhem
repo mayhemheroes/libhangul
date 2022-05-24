@@ -1,0 +1,11 @@
+FROM --platform=linux/amd64 ubuntu:20.04
+
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y automake pkg-config libtool build-essential gettext libexpat1-dev autopoint
+
+COPY . /repo
+WORKDIR /repo
+RUN ./autogen.sh
+RUN ./configure
+RUN make -j8
+ENV LD_LIBRARY_PATH=/repo/hangul/.libs
