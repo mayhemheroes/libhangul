@@ -6,15 +6,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y automake pkg-config libtoo
 COPY . /repo
 WORKDIR /repo
 RUN ./autogen.sh
-RUN ./configure
+RUN ./configure --prefix=/install
 RUN make -j8
+RUN make install
 ENV LD_LIBRARY_PATH=/repo/hangul/.libs
 
-RUN mkdir -p /deps
-RUN ldd /repo/tools/.libs/hangul | tr -s '[:blank:]' '\n' | grep '^/' | xargs -I % sh -c 'cp % /deps;'
-
 FROM ubuntu:20.04 as package
-
-COPY --from=builder /deps /deps
-COPY --from=builder /repo/tools/.libs/hangul /repo/tools/.libs/hangul
-ENV LD_LIBRARY_PATH=/deps
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libexpat1-dev
+COPY --from=builder /install /install
