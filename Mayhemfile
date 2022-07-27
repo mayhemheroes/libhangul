@@ -2,4 +2,4 @@ project: libhangul
 target: hangul
 
 cmds:
-  - cmd: /hangul @@
+  - cmd: /install/bin/hangul @@
