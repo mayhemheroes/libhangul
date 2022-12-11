@@ -1,6 +1,0 @@
-project: libhangul
-target: hangul2
-
-cmds:
-  # - cmd: /install/bin/hangul @@
-  - cmd: /fuzz

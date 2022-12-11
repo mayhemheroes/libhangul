@@ -1,0 +1,6 @@
+project: libhangul
+target: hangul-jamo-to-cjamo
+
+cmds:
+  - cmd: /fuzz_hangul_jamo_to_cjamo
+    libfuzzer: true

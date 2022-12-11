@@ -59,7 +59,8 @@ jobs:
       fail-fast: false
       matrix:
         mayhemfile:
-          - mayhem/Mayhemfile
+          - mayhem/Mayhemfile_hangul
+          - mayhem/Mayhemfile_hangul_jamo_to_cjamo
 
     steps:
       - uses: actions/checkout@v3
