@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 ubuntu:20.04 as builder
+FROM --platform=linux/amd64 ubuntu:22.04 AS builder
 
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y automake pkg-config libtool build-essential gettext libexpat1-dev autopoint clang
@@ -11,7 +11,7 @@ RUN make -j8
 RUN make install
 RUN clang++ /repo/mayhem/fuzz_hangul_jamo_to_cjamo.cpp -fsanitize=fuzzer,address -I /install/include/hangul-1.0/ -L /install/lib/ -l:libhangul.a -o /fuzz
 
-FROM ubuntu:20.04 as package
+FROM ubuntu:22.04 AS package
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libexpat1-dev
 COPY --from=builder /install /install
