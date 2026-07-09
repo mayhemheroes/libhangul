@@ -1,0 +1,5 @@
+project: libhangul
+target: hangul
+
+cmds:
+  - cmd: /mayhem/hangul-tool @@
